@@ -42,5 +42,50 @@ public class AssignedContactService {
  
         return assignedContacts;
     }
+    
+    public Optional<AssignedContact> getAssignedContactById(Long id) {
+        return assignedContactRepository.findById(id);
+    }
+ 
+    public AssignedContact saveAssignedContact(AssignedContact assignedContact) {
+        return assignedContactRepository.save(assignedContact);
+    }
+ 
+    public List<AssignedContact> updateLeadByCategory(String category, String status, String assignedTo) {
+        List<AssignedContact> updatedAssignedContacts = new ArrayList<>();
+ 
+        try {
+            List<AssignedContact> assignedContacts = assignedContactRepository.findByCategory(category);
+ 
+            for (AssignedContact assignedContact : assignedContacts) {
+                assignedContact.setStatus(status);
+                assignedContact.setAssignedTo(assignedTo);
+                assignedContactRepository.save(assignedContact);
+                updatedAssignedContacts.add(assignedContact);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+ 
+        return updatedAssignedContacts;
+    }
+ 
+    public List<AssignedContact> getAssignedContactsBySegment(String segmentType, String value, String assignedTo) {
+        List<AssignedContact> assignedContacts;
+ 
+        if ("category".equals(segmentType)) {
+            assignedContacts = assignedContactRepository.findByCategoryAndAssignedTo(value, assignedTo);
+        } else {
+            assignedContacts = new ArrayList<>();
+        }
+ 
+        return assignedContacts;
+    }
+ 
+ 
+    public boolean existsByEmail(String email) {
+        return assignedContactRepository.existsByEmail(email);
+    }
  
 }
