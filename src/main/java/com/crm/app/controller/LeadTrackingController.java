@@ -123,4 +123,33 @@ public class LeadTrackingController {
         List<AssignedContact> assignedContacts = assignedContactService.assignContacts(segmentedContacts, segmentType, value, assignedTo, status);
         return new ResponseEntity<>(assignedContacts, HttpStatus.OK);
     }
+    
+    @PutMapping("/updateStatus/{id}")
+    public ResponseEntity<?> updateContactStatus(@PathVariable Long id, @RequestBody @Valid Map<String, String> requestBody, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getFieldErrors().stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
+
+        String status = requestBody.get("status");
+
+     
+        if (!status.equals("active") && !status.equals("inactive")) {
+            return new ResponseEntity<>("Status must be either 'active' or 'inactive'", HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<AssignedContact> optionalAssignedContact = assignedContactService.getAssignedContactById(id);
+
+        if (optionalAssignedContact.isPresent()) {
+            AssignedContact assignedContact = optionalAssignedContact.get();
+            assignedContact.setStatus(status);
+            assignedContactService.saveAssignedContact(assignedContact);
+            return new ResponseEntity<>(assignedContact, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Assigned contact not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
