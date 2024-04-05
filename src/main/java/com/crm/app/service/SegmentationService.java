@@ -37,6 +37,11 @@ public class SegmentationService {
     public Optional<Contact> getContactById(Long id) {
         return segmentedRepository.findById(id);
     }
+    public boolean existsByEmailAndPhoneNumber(String email, String phoneNumber) {
+        Optional<Contact> existingContactByEmail = segmentedRepository.findByEmail(email);
+        Optional<Contact> existingContactByPhoneNumber = segmentedRepository.findByPhoneNumber(phoneNumber);
 
+        return existingContactByEmail.isPresent() || existingContactByPhoneNumber.isPresent();
+    }
    
 }
