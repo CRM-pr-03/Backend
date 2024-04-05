@@ -3,14 +3,11 @@ package com.crm.app.admin.feign;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.crm.app.admin.dto.Ticket;
-import com.crm.app.admin.dto.User;
-
+import com.crm.app.admin.dto.user;
 
 
 
@@ -19,15 +16,9 @@ public interface AdminFeign {
 
 	
 	@GetMapping("/user/getuser")
-	public List<User> getusersdetails();
+	public List<user> getusersdetails();
 	
 	@PutMapping("/user/giveapproval/{email}")
 	public String access(@PathVariable String email); 
-	
+	}
 
-@GetMapping("/user/tickets")
-public ResponseEntity<List<Ticket>> getAllTickets() ;
-    
-  
-
-}

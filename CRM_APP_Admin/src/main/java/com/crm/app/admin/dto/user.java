@@ -2,7 +2,7 @@ package com.crm.app.admin.dto;
 
 
 
-public class User {
+public class user {
 	
 		private long id;
 
@@ -11,7 +11,7 @@ public class User {
 		private String email;
 		private Long mobile;
 		private String password;
-		public User(Long id, String firstname, String lastname, String email, Long mobile, String password) {
+		public user(Long id, String firstname, String lastname, String email, Long mobile, String password) {
 			super();
 			this.id = id;
 			this.firstname = firstname;
@@ -20,7 +20,7 @@ public class User {
 			this.mobile = mobile;
 			this.password = password;
 		}
-		public User() {
+		public user() {
 			super();
 		}
 		

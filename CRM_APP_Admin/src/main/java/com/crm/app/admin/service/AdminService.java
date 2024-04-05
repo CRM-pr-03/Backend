@@ -4,24 +4,20 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-
 import com.crm.app.admin.dto.AdminDTO;
-import com.crm.app.admin.dto.Ticket;
-import com.crm.app.admin.dto.User;
+import com.crm.app.admin.dto.user;
 import com.crm.app.admin.entity.Admin;
 
 public interface AdminService {
 
-	ResponseEntity<String> addadmin(AdminDTO admindto);
+	ResponseEntity<?> addadmin(AdminDTO admindto);
 
 	public List<Admin> getadmindetails();
 
-  public List<User> getdetails();
+  public List<user> getdetails();
 
   public String access(String email);
 
-ResponseEntity<String> login(Admin admindto);
-
-ResponseEntity<List<Ticket>> getAllTickets();
+ResponseEntity<?> Login(Admin admindto);
 
 }
