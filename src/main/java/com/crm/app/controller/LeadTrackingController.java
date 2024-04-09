@@ -67,6 +67,21 @@ public class LeadTrackingController {
             }
         }
         
+        @PutMapping("/updateStatus/{contactId}")
+        public ResponseEntity<?> updateLeadTrackingStatus(@PathVariable Long contactId, @RequestBody Map<String, String> requestBody) {
+            String newStatus = requestBody.get("status");
+            if (!isValidStatus(newStatus)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid status value. Accepted values are: qualified, unqualified, contacted, nurtured");
+            }
+            try {
+                LeadTracking updatedLeadTracking = leadTrackingService.updateLeadTrackingStatus(contactId, newStatus);
+                return ResponseEntity.ok(updatedLeadTracking);
+            } catch (EntityNotFoundException e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        
+        
         private boolean isValidStatus(String status) {
             List<String> acceptedStatusValues = Arrays.asList("qualified", "unqualified", "contacted", "nurtured");
             return acceptedStatusValues.contains(status);
