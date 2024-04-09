@@ -61,4 +61,17 @@ public class LeadTrackingService {
         List<LeadTracking> leadTrackings = leadTrackingRepository.findByCategory(category);
         return !leadTrackings.isEmpty();
     }
+    
+    @Transactional
+    public LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus) {
+        List<LeadTracking> leadTrackings = leadTrackingRepository.findByContactId(contactId);
+        if (!leadTrackings.isEmpty()) {
+            LeadTracking leadTracking = leadTrackings.get(0);
+            leadTracking.setStatus(newStatus);
+            return leadTrackingRepository.save(leadTracking);
+        } else {
+            logger.error("Lead tracking record with contact ID {} not found.", contactId);
+            throw new RuntimeException("Lead tracking record with contact ID " + contactId + " not found.");
+        }
+    }
 }
