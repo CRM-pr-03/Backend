@@ -81,10 +81,22 @@ public class LeadTrackingController {
             }
         }
         
+        @GetMapping("/sales-representatives/category/{category}")
+        public ResponseEntity<?> getSalesRepresentativeByCategory(@PathVariable String category) {
+            List<SalesRepresentative> salesReps = salesRepresentativeService.findByCategory(category);
+     
+            if (!salesReps.isEmpty()) {
+                return ResponseEntity.ok(salesReps);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sales representatives with category '" + category + "' not found.");
+            }
+        }
+        
         
         private boolean isValidStatus(String status) {
             List<String> acceptedStatusValues = Arrays.asList("qualified", "unqualified", "contacted", "nurtured");
             return acceptedStatusValues.contains(status);
         }
+ 
         
     }
