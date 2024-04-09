@@ -1,44 +1,36 @@
 package com.crm.app.controller;
 
-import java.util.Date;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.crm.app.entity.Contact;
 import com.crm.app.service.SegmentationService;
 
+
+import java.util.List;
+
 @RestController
-@CrossOrigin
 @RequestMapping("/api/contacts")
 public class SegmentationController {
 
-    @Autowired
-    private SegmentationService segmentationService;
+    private final SegmentationService segmentationService;
 
-    @GetMapping("segmentation/{segmentType}")
-    public ResponseEntity<List<Contact>> segmentContacts(@PathVariable String segmentType,
-                                                          @RequestParam(required = false) String value,
-                                                          @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
-                                                          @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
-        List<Contact> segmentedContacts;
-        if ("category".equals(segmentType)) {
-            segmentedContacts = segmentationService.segmentContactsByCategory(value);
-        } else if ("country".equals(segmentType)) {
-            segmentedContacts = segmentationService.segmentContactsByCountry(value);
-        } else if ("date".equals(segmentType)) {
-            segmentedContacts = segmentationService.segmentContactsByDate(fromDate, toDate);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
- 
-        segmentationService.saveContacts(segmentedContacts);
- 
+    public SegmentationController(SegmentationService segmentationService) {
+        this.segmentationService = segmentationService;
+    }
+
+    @GetMapping("/segmented/category/{category}")
+    public ResponseEntity<List<Contact>> segmentContactsByCategory(@PathVariable String category) {
+        List<Contact> segmentedContacts = segmentationService.segmentContactsByCategory(category);
+        return new ResponseEntity<>(segmentedContacts, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/segmented/country/{country}")
+    public ResponseEntity<List<Contact>> segmentContactsByCountry(@PathVariable String country) {
+        List<Contact> segmentedContacts = segmentationService.segmentContactsByCountry(country);
         return new ResponseEntity<>(segmentedContacts, HttpStatus.OK);
     }
 }
-    
 

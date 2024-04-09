@@ -1,21 +1,23 @@
 package com.crm.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.crm.app.entity.Contact;
 import com.crm.app.service.AddUpdateService;
- 
+
 @RestController
 @RequestMapping("/api/contacts")
+@CrossOrigin
 public class CustomerController {
- 
-    @Autowired
-    private AddUpdateService addUpdateService;
- 
- 
+
+    private final AddUpdateService addUpdateService;
+
+    public CustomerController(AddUpdateService addUpdateService) {
+        this.addUpdateService = addUpdateService;
+    }
+
     @PostMapping("/addcontacts")
     public ResponseEntity<?> addOrUpdateContact(@RequestBody Contact contact) {
         if (contact.getId() != null) {
@@ -24,7 +26,7 @@ public class CustomerController {
             return addNewContact(contact);
         }
     }
- 
+
     private ResponseEntity<?> updateContact(Contact contact) {
         ResponseEntity<?> responseEntity = addUpdateService.updateContact(contact);
         if (responseEntity.getStatusCode() == HttpStatus.NOT_FOUND) {
@@ -32,11 +34,9 @@ public class CustomerController {
         }
         return responseEntity;
     }
- 
+
     private ResponseEntity<?> addNewContact(Contact contact) {
-        ResponseEntity<?> responseEntity = addUpdateService.addContact(contact);
-        if (responseEntity.getStatusCode() == HttpStatus.CREATED) {
-        }
-        return responseEntity;
+        return addUpdateService.addContact(contact);
     }
 }
+
