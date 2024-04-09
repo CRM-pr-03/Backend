@@ -57,6 +57,16 @@ public class LeadTrackingController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No sales representative found for category '" + category + "'.");
         }
         
+        @GetMapping("/lead-trackings/contact/{contactId}")
+        public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {
+            List<LeadTracking> leadTrackings = leadTrackingService.getLeadTrackingsByContactId(contactId);
+            if (!leadTrackings.isEmpty()) {
+                return ResponseEntity.ok(leadTrackings);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No lead trackings found for contact ID: " + contactId);
+            }
+        }
+        
         private boolean isValidStatus(String status) {
             List<String> acceptedStatusValues = Arrays.asList("qualified", "unqualified", "contacted", "nurtured");
             return acceptedStatusValues.contains(status);
