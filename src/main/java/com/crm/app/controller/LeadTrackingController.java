@@ -56,47 +56,65 @@ public class LeadTrackingController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No sales representative found for category '" + category + "'.");
         }
-        
-        @GetMapping("/lead-trackings/contact/{contactId}")
-        public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {
-            List<LeadTracking> leadTrackings = leadTrackingService.getLeadTrackingsByContactId(contactId);
-            if (!leadTrackings.isEmpty()) {
-                return ResponseEntity.ok(leadTrackings);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No lead trackings found for contact ID: " + contactId);
-            }
-        }
-        
-        @PutMapping("/updateStatus/{contactId}")
-        public ResponseEntity<?> updateLeadTrackingStatus(@PathVariable Long contactId, @RequestBody Map<String, String> requestBody) {
-            String newStatus = requestBody.get("status");
-            if (!isValidStatus(newStatus)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid status value. Accepted values are: qualified, unqualified, contacted, nurtured");
-            }
-            try {
-                LeadTracking updatedLeadTracking = leadTrackingService.updateLeadTrackingStatus(contactId, newStatus);
-                return ResponseEntity.ok(updatedLeadTracking);
-            } catch (EntityNotFoundException e) {
-                return ResponseEntity.notFound().build();
-            }
-        }
-        
-        @GetMapping("/sales-representatives/category/{category}")
-        public ResponseEntity<?> getSalesRepresentativeByCategory(@PathVariable String category) {
-            List<SalesRepresentative> salesReps = salesRepresentativeService.findByCategory(category);
-     
-            if (!salesReps.isEmpty()) {
-                return ResponseEntity.ok(salesReps);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sales representatives with category '" + category + "' not found.");
-            }
-        }
-        
-        
-        private boolean isValidStatus(String status) {
-            List<String> acceptedStatusValues = Arrays.asList("qualified", "unqualified", "contacted", "nurtured");
-            return acceptedStatusValues.contains(status);
-        }
- 
-        
     }
+    @GetMapping("/lead-trackings/contact/{contactId}")
+    public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {
+        List<LeadTracking> leadTrackings = leadTrackingService.getLeadTrackingsByContactId(contactId);
+        if (!leadTrackings.isEmpty()) {
+            return ResponseEntity.ok(leadTrackings);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No lead trackings found for contact ID: " + contactId);
+        }
+    }
+    @PutMapping("/updateStatus/{contactId}")
+    public ResponseEntity<?> updateLeadTrackingStatus(@PathVariable Long contactId, @RequestBody Map<String, String> requestBody) {
+        String newStatus = requestBody.get("status");
+        if (!isValidStatus(newStatus)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid status value. Accepted values are: qualified, unqualified, contacted, nurtured");
+        }
+        try {
+            LeadTracking updatedLeadTracking = leadTrackingService.updateLeadTrackingStatus(contactId, newStatus);
+            return ResponseEntity.ok(updatedLeadTracking);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/sales-representatives/category/{category}")
+    public ResponseEntity<?> getSalesRepresentativeByCategory(@PathVariable String category) {
+        List<SalesRepresentative> salesReps = salesRepresentativeService.findByCategory(category);
+
+        if (!salesReps.isEmpty()) {
+            return ResponseEntity.ok(salesReps);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sales representatives with category '" + category + "' not found.");
+        }
+    }
+
+    @GetMapping("/contacts/category/{category}") // New method to retrieve contacts by category
+    public ResponseEntity<?> getContactsByCategory(@PathVariable String category) {
+        List<Contact> contactsByCategory = contactRepository.findByCategory(category);
+        if (!contactsByCategory.isEmpty()) {
+            return ResponseEntity.ok(contactsByCategory);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Contacts with category '" + category + "' not found.");
+        }
+    }
+    @GetMapping("/lead-trackings")
+    public ResponseEntity<?> getAllLeadTrackings() {
+        List<LeadTracking> leadTrackings = leadTrackingService.getAllLeadTrackings();
+        if (!leadTrackings.isEmpty()) {
+            return ResponseEntity.ok(leadTrackings);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No lead trackings found.");
+        }
+    }
+    
+  
+
+    private boolean isValidStatus(String status) {
+        List<String> acceptedStatusValues = Arrays.asList("qualified", "unqualified", "contacted", "nurtured");
+        return acceptedStatusValues.contains(status);
+    }
+}
+
