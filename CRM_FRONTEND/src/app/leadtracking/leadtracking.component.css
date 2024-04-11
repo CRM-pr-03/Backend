@@ -1,0 +1,100 @@
+.flex-container {
+    display: flex;
+    flex-direction: row; /* Arrange items vertically */
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  .container-wrapper {
+    display: flex; /* Set display to flex to make containers side by side */
+    justify-content: space-between; /* Distribute items evenly */
+  }
+  .container {
+    flex: 0 0 calc(50% - 10px); /* Each container takes up 50% of the available space with gap */
+    background-color: #e7eaf4;
+    border: 1px solid #f6e5e5;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Add margin to create space between containers */
+    max-width: 400px;
+  }
+  .container1 {
+    background-color: #e9ecf7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  /* Adjust table layout */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  @media only screen and (max-width: 600px) {
+    /* Adjust table layout for smaller screens */
+    th, td {
+      padding: 6px;
+      font-size: 12px;
+    }
+  }
+  /* Icon box styles */
+  .icon-box {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 10px;
+  }
+  .icon-box.red {
+    background-color: red;
+    border: 1px solid red;
+  }
+  .icon-box.green {
+    background-color: green;
+    border: 1px solid green;
+  }
+  .icon-box.blue {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+  }
+  .icon-box.mat-icon {
+    font-size: 24px;
+    color: #fff;
+  }
+  button {
+    background-color: #007bff; /* Dark blue background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for the floating effect */
+    transition: all 0.3s ease; /* Smooth transition effect */
+  }
+  button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  }
+  button:focus {
+    outline: none; /* Remove focus outline */
+  }
+  /* Adjust button styles for smaller screens */
+  @media only screen and (max-width: 600px) {
+    button {
+      padding: 8px 16px; /* Reduce padding for smaller screens */
+      font-size: 14px; /* Reduce font size for smaller screens */
+    }
+  }
+  .label{
+    font-size: 15px;
+    color: #007bff;
+  }
