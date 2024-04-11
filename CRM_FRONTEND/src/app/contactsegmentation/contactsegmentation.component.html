@@ -1,0 +1,61 @@
+<div class="container">
+    <h2>Search Contacts</h2>
+    <div class="form-group">
+    <label for="searchBy">Search by:</label>
+    <select class="form-control" id="searchBy" [(ngModel)]="searchBy">
+    <option value="">Select</option>
+    <option value="category">Category</option>
+    <option value="country">Country</option>
+    </select>
+    </div>
+    <div *ngIf="searchBy === 'category'">
+    <div class="form-group">
+    <label for="category">Select Category:</label>
+    <select class="form-control" id="category" [(ngModel)]="category">
+    <option value="">Select Category</option>
+    <option value="Textile">Textile</option>
+    <option value="Electronics">Electronics</option>
+    <!-- Add more options here if needed -->
+    </select>
+    </div>
+    <button class="btn btn-primary" (click)="searchByCategory()">Search</button>
+    </div>
+    <div *ngIf="searchBy === 'country'">
+    <div class="form-group">
+    <label for="country">Select Country:</label>
+    <select class="form-control" id="country" [(ngModel)]="country">
+    <option value="">Select Country</option>
+    <option value="India">India</option>
+    <option value="USA">USA</option>
+    <!-- Add more options here if needed -->
+    </select>
+    </div>
+    <button class="btn btn-primary" (click)="searchByCountry()">Search</button>
+    </div>
+    <div *ngIf="contacts.length > 0" class="table-responsive">
+    <table class="table">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Category</th>
+    <th>Phone Number</th>
+    <th>Country</th>
+    <th>Date Created</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let contact of contacts">
+    <td>{{ contact.id }}</td>
+    <td>{{ contact.name }}</td>
+    <td>{{ contact.email }}</td>
+    <td>{{ contact.category }}</td>
+    <td>{{ contact.phoneNumber }}</td>
+    <td>{{ contact.country }}</td>
+    <td>{{ contact.dateCreated }}</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
