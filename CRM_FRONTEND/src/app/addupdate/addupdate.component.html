@@ -1,0 +1,19 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="country" placeholder="Country">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="phoneNumber" placeholder="Phone Number">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="category" placeholder="Category">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+  

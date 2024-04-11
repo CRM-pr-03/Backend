@@ -1,0 +1,100 @@
+<div class="flex-container">
+  <div class="container">
+  <div>
+    <h2 style="color: rgb(6, 6, 95); font-size: 25px;">Assign Salesrepresentative</h2>
+    <br>
+   
+    <form (submit)="segmentAndAssign()" #myForm="ngForm">
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" [(ngModel)]="category" required>
+        <div class="icon-box red" (click)="getSalesRepresentativesByCategory()">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+       
+        <ul *ngFor="let salesRep of salesReps">
+          <li>{{ salesRep.name }} - {{ salesRep.email }} - {{ salesRep.category }}- {{ salesRep.designation }} </li>
+        </ul>
+       
+        <div class="icon-box green" (click)="getContactsByCategory()">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+        <ul *ngFor="let contact of contacts">
+          <li>{{ contact.name }} - {{ contact.email }} - {{ contact.category }} </li>
+        </ul>
+     
+   <br>
+   <br>
+      <label for="status">Status:</label>
+      <select id="status" name="status" [(ngModel)]="status" required>
+        <option value="qualified">qualified</option>
+        <option value="unqualified">unqualified</option>
+        <option value="contacted">contacted</option>
+        <option value="nurtured">nurtured</option>
+      </select>
+     <br><br>
+      <button type="submit"> Assign Contacts</button>
+    </form>
+   </div>
+   </div>
+   
+   <div class="container">
+  <div>
+    <h2 style="color: rgb(6, 6, 95); font-size: 25px;">update lead status by ID:</h2>
+    <br>
+    <label for="leadsId">Leads ID:</label>
+    <input type="number" id="leadsId" name="leadsId" [(ngModel)]="leadsId" required>
+      <div class="icon-box blue" (click)="getLeadTrackingsByContactId()">
+        <mat-icon>keyboard_arrow_right</mat-icon> <!-- Right arrow icon -->
+      </div>
+      <ul *ngIf="leadTrackings">
+        <li *ngFor="let leadTracking of leadTrackings">
+          {{ leadTracking.name }} - {{ leadTracking.email }} - {{ leadTracking.status }} - {{ leadTracking.category }}
+        </li>
+      </ul>
+   
+   <br>
+    <label for="newStatus">New Status:</label>
+    <select id="newStatus" name="newStatus" [(ngModel)]="newStatus" required>
+      <option value="qualified">qualified</option>
+      <option value="unqualified">unqualified</option>
+      <option value="contacted">contacted</option>
+      <option value="nurtured">nurtured</option>
+    </select>
+    <br><br>
+    <button (click)="updateLeadTrackingStatus()">Update Status</button>
+  </div>
+   
+  </div>
+  </div>
+   
+    <div class="container1">
+      <h3>Get All Lead Trackings</h3>
+      <button (click)="getAllLeadTrackings()">Get All Lead Trackings</button>
+      <table *ngIf="allLeadTrackings.length > 0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Country</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Sales Representative</th>
+            <th>Leads ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leadTracking of allLeadTrackings">
+            <td>{{ leadTracking.name }}</td>
+            <td>{{ leadTracking.email }}</td>
+            <td>{{ leadTracking.phoneNumber }}</td>
+            <td>{{ leadTracking.country }}</td>
+            <td>{{ leadTracking.category }}</td>
+            <td>{{ leadTracking.status }}</td>
+            <td>{{ leadTracking.salesRepresentativeName }}</td>
+            <td>{{ leadTracking.contact.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="allLeadTrackings.length === 0">No lead trackings available.</p>
+    </div>

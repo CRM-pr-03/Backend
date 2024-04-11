@@ -1,0 +1,71 @@
+<div class="a">
+<form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newContact.name" required #name="ngModel">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
+            <div *ngIf="name?.errors?.['required']">
+                Name is required.
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="newContact.email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" #email="ngModel">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+            <div *ngIf="email?.errors?.['required']">
+                Email is required.
+            </div>
+            <div *ngIf="email?.errors?.['pattern']">
+                Please enter a valid email address.
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" [(ngModel)]="newContact.category" required #category="ngModel">
+        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="error">
+            <div *ngIf="category?.errors?.['required']">
+                Category is required.
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="newContact.phoneNumber" required pattern="[0-9]{10}" #phoneNumber="ngModel">
+        <div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="error">
+            <div *ngIf="phoneNumber?.errors?.['required']">
+                Phone Number is required.
+            </div>
+            <div *ngIf="phoneNumber?.errors?.['pattern']">
+                Please enter a valid 10-digit phone number.
+            </div>
+        </div>
+    </div>
+<br>
+      <div>
+      <label for="dateCreated">Date Created:</label>
+      <input type="date" id="dateCreated" name="dateCreated" [(ngModel)]="newContact.dateCreated" required #dateCreated="ngModel">
+      <div *ngIf="dateCreated?.invalid && (dateCreated?.dirty || dateCreated?.touched)" class="error">
+        <div *ngIf="dateCreated?.errors?.['required']">
+          Date Created is required.
+        </div>
+      </div>
+      </div>
+  
+     
+<br>
+
+    <div>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" [(ngModel)]="newContact.country" required #country="ngModel">
+        <div *ngIf="country?.invalid && (country?.dirty || country?.touched)" class="error">
+            <div *ngIf="country?.errors?.['required']">
+                Country is required.
+            </div>
+        </div>
+    </div>
+    <button type="submit" [disabled]="contactForm.invalid">Add Contact</button>
+    <div *ngIf="contactForm.invalid" class="notification">Please fill out all fields.</div>
+</form>
+</div>

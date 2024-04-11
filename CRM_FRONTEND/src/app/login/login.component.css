@@ -1,0 +1,66 @@
+.head{
+    text-align: center;
+    margin-bottom: 3%;
+  margin-right: 5%;
+    padding-top: 5%;
+    color: azure;
+  
+}
+
+.back{
+  background-image: url(./../../assets/signuplogo.jpg);
+  background-position: cover;
+  height: 700px;
+  
+    
+ 
+ 
+}
+form{
+  margin-left: 30%;
+  color: azure;
+}
+ 
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+ 
+  input {
+    width: 100%;
+    padding: 8px;
+    /* margin-bottom: 15px; */
+    box-sizing: border-box;
+  }
+ 
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left: 20%;
+  }
+ 
+ 
+  button:hover {
+    background-color: #45a049;
+  }  
+  h6{
+    color: azure;
+    margin-top: 2%;
+
+  }
+ 
+  .signupp{
+    color: azure;
+    text-decoration: none;
+
+  }
+  .signupp:hover{
+    font-size: larger;
+    color: orange;
+  }

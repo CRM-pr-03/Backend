@@ -1,0 +1,32 @@
+.card {
+    background-color: #feffff; 
+    border: 1px solid #ffffff; 
+    border-radius: 8px; 
+    width: 300px;
+}
+
+.card-title {
+    color: #0452a7; /* Text color for the card titles */
+}
+
+.card-text {
+    color: #333; /* Text color for the card content */
+}
+
+.btn-primary {
+    background-color: rgb(95, 5, 205); /* Background color for the primary buttons */
+    border-color: rgb(95, 5, 205); /* Border color for the primary buttons */
+}
+
+.btn-primary:hover {
+    background-color: #6200ee; 
+    border-color: #6200ee; 
+}
+.customer {
+  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 700px;
+}
+

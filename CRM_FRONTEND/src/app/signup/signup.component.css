@@ -1,0 +1,38 @@
+form{
+  
+  margin: 5%;
+  font-weight: bold;
+}
+h2{
+  padding-top: 5px;
+  margin-left:45% ;
+  color: azure;
+}
+.signupp{
+  background-image: url(../../assets/signuplogo.jpg);
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 700px;
+    
+}
+.form-label{
+  color: azure;
+}
+.btn{
+  margin-top: 2%;
+  margin-left: 45%;
+}
+h6{
+color: azure;
+}
+.reg{
+  text-decoration: none;
+  color: azure;
+ 
+}
+.reg:hover{
+  font-size: larger;
+  color:darkcyan
+}
