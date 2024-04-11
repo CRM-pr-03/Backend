@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+ 
+// Define the Contact interface
 interface Contact {
   id: number;
   name: string;
@@ -9,6 +11,7 @@ interface Contact {
   country: string;
   dateCreated: string;
 }
+ 
 @Component({
   selector: 'app-contact-segmentation',
   templateUrl: './contactsegmentation.component.html',
@@ -19,23 +22,25 @@ export class ContactsegmentationComponent {
   category: string = '';
   country: string = '';
   contacts: Contact[] = [];
+ 
   constructor(private http: HttpClient) {}
+ 
   searchByCategory() {
     if (this.category.trim() !== '') {
-      this.http.get<Contact[]>(`
-http://localhost:9099/api/contacts/segmented/category/${this.category}`)
+      this.http.get<Contact[]>(`http://localhost:9099/api/contacts/segmented/category/${this.category}`)
         .subscribe(contacts => {
           this.contacts = contacts;
         });
     }
   }
+ 
   searchByCountry() {
     if (this.country.trim() !== '') {
-      this.http.get<Contact[]>(`
-http://localhost:9099/api/contacts/segmented/country/${this.country}`)
+      this.http.get<Contact[]>(`http://localhost:9099/api/contacts/segmented/country/${this.country}`)
         .subscribe(contacts => {
           this.contacts = contacts;
         });
     }
   }
 }
+ 

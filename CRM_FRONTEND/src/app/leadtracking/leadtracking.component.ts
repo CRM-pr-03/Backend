@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+ 
+ 
 @Component({
   selector: 'app-leadtracking',
   templateUrl: './leadtracking.component.html',
@@ -13,19 +14,21 @@ export class LeadtrackingComponent {
   leadTrackings: any[] = []; // Initialize leadTrackings
   // Initialize updateContactId
   newStatus: string = '';
+ 
   salesReps: any[] = []; // Initialize salesReps
   contactCategory: string = '';
   contacts: any[] = []; // Initialize contacts
   allLeadTrackings: any[] = []; // Initialize allLeadTrackings
+ 
   constructor(private http: HttpClient) {}
+ 
   segmentAndAssign() {
     const requestData = {
       category: this.category,
       status: this.status
     };
-    this.http.post<any>('
-http://localhost:9099/api/leadtracking/segmentAndAssign'
-, requestData).subscribe(
+ 
+    this.http.post<any>('http://localhost:9099/api/leadtracking/segmentAndAssign', requestData).subscribe(
       response => {
        alert(" Assigned succesfully");
       },
@@ -34,9 +37,9 @@ http://localhost:9099/api/leadtracking/segmentAndAssign'
       }
     );
   }
+ 
   getLeadTrackingsByContactId() {
-    this.http.get<any>(`
-http://localhost:9099/api/leadtracking/lead-trackings/contact/${this.leadsId}`).subscribe(
+    this.http.get<any>(`http://localhost:9099/api/leadtracking/lead-trackings/contact/${this.leadsId}`).subscribe(
       response => {
         this.leadTrackings = response;
       },
@@ -45,13 +48,13 @@ http://localhost:9099/api/leadtracking/lead-trackings/contact/${this.leadsId}`).
       }
     );
   }
+ 
   updateLeadTrackingStatus() {
     const requestData = {
       status: this.newStatus
     };
-    this.http.put<any>(`
-http://localhost:9099/api/leadtracking/updateStatus/${this.leadsId}`
-, requestData).subscribe(
+ 
+    this.http.put<any>(`http://localhost:9099/api/leadtracking/updateStatus/${this.leadsId}`, requestData).subscribe(
       response => {
         alert("Status updated:");
       },
@@ -60,10 +63,10 @@ http://localhost:9099/api/leadtracking/updateStatus/${this.leadsId}`
       }
     );
   }
-
+ 
+ 
   getSalesRepresentativesByCategory() {
-    this.http.get<any>(`
-http://localhost:9099/api/leadtracking/sales-representatives/category/${this.category}`).subscribe(
+    this.http.get<any>(`http://localhost:9099/api/leadtracking/sales-representatives/category/${this.category}`).subscribe(
       response => {
         this.salesReps = response;
       },
@@ -72,9 +75,9 @@ http://localhost:9099/api/leadtracking/sales-representatives/category/${this.cat
       }
     );
   }
+ 
   getContactsByCategory() {
-    this.http.get<any>(`
-http://localhost:9099/api/leadtracking/contacts/category/${this.category}`).subscribe(
+    this.http.get<any>(`http://localhost:9099/api/leadtracking/contacts/category/${this.category}`).subscribe(
       response => {
         this.contacts = response;
       },
@@ -83,9 +86,9 @@ http://localhost:9099/api/leadtracking/contacts/category/${this.category}`).subs
       }
     );
   }
+ 
   getAllLeadTrackings() {
-    this.http.get<any>('
-http://localhost:9099/api/leadtracking/lead-trackings').subscribe(
+    this.http.get<any>('http://localhost:9099/api/leadtracking/lead-trackings').subscribe(
       response => {
         this.allLeadTrackings = response;
       },
