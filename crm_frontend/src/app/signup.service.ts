@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 export class SignupService {
  
  
- 
-  
   
   BASEURL:string="http://localhost:8080/user/";
   ADMINURL:string="http://localhost:8082/admin/";
