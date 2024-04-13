@@ -31,8 +31,6 @@ public class User {
 		@JsonIgnore
 		private List<Contacts> contacts;
 
-
-		
 		
 		public User(long id, String firstname, String lastname, String email, String mobile, String password,
 				boolean access, String otp, LocalDateTime createdAt, LocalDateTime updatedAt, List<Contacts> contacts) {
