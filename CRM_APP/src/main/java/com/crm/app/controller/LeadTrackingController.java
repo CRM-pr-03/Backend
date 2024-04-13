@@ -45,17 +45,20 @@ public class LeadTrackingController {
     public ResponseEntity<?> segmentAndAssignContacts(@RequestBody Map<String, String> requestParams) {
         String category = requestParams.get("category");
         String status = requestParams.get("status");
- 
+
         if (!isValidStatus(status)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid status value. Accepted values are: qualified, unqualified, contacted, nurtured");
         }
- 
+
         List<SalesRepresentative> salesReps = salesRepresentativeService.findByCategory(category);
- 
+
         if (salesReps.size() == 1) {
             SalesRepresentative salesRep = salesReps.get(0);
             List<Contacts> segmentedContacts = segmentationService.segmentContactsByCategory(category);
             List<LeadTracking> leadTrackings = leadTrackingService.assignContactsToSalesRepresentative(category, status, salesRep, segmentedContacts);
+            if (leadTrackings.isEmpty()) {
+                return ResponseEntity.ok("No new contacts to assign.");
+            }
             return ResponseEntity.ok(leadTrackings);
         } else if (salesReps.size() > 1) {
             return ResponseEntity.status(HttpStatus.MULTIPLE_CHOICES).body("Multiple sales representatives found for category '" + category + "'. Manual assignment required.");
@@ -63,6 +66,7 @@ public class LeadTrackingController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No sales representative found for category '" + category + "'.");
         }
     }
+
 	
     @GetMapping("/lead-trackings/contact/{contactId}")
     public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {

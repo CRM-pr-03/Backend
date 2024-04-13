@@ -11,9 +11,9 @@ export class SignupService {
  
   
   
-  BASEURL:string="http://localhost:8055/user/";
-  ADMINURL:string="http://localhost:9191/admin/";
-  LEADURL:string="http://localhost:8055/leads/";
+  BASEURL:string="http://localhost:8080/user/";
+  ADMINURL:string="http://localhost:8082/admin/";
+  LEADURL:string="http://localhost:8080/leads/";
     constructor(private http:HttpClient)
      {
    
