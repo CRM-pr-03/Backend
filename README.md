@@ -5,3 +5,5 @@ Welcome to the CRM Software project! This repository contains the codebase for b
 ## Overview
 
 Our CRM software aims to provide a comprehensive solution for managing customer relationships, streamlining sales processes, and enhancing business productivity. This README serves as a guide to understanding the structure and components of the project.
+
+Features from Admin and Customer Perspective
