@@ -68,6 +68,7 @@ public class LeadTrackingController {
     }
 
 	
+    
     @GetMapping("/lead-trackings/contact/{contactId}")
     public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {
         List<LeadTracking> leadTrackings = leadTrackingService.getLeadTrackingsByContactId(contactId);
