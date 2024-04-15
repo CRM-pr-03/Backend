@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit{
             sessionStorage.setItem("email", resp.data.email);
             sessionStorage.setItem("firstname", resp.data.firstname);
             sessionStorage.setItem("role","U")
+           
          
             this.toast.success('Welcome '+resp.data.firstname,"Login Successful" );
             this._router.navigate(['user']);

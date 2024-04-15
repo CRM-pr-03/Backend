@@ -45,28 +45,28 @@ public class ContactServiceIMPL implements ContactService {
 
 	@Override
 	public ResponseEntity<Contacts> updateContact(Long userId, Contacts contact) {
-         Optional<User> optionalUser = userrepo.findById(userId);
-		 if (optionalUser.isPresent()) {
-		        User user = optionalUser.get();
-		        // Associate the contact with the user
-		        Optional<Contacts> optionalContact = contactrepo.findById(contact.getId());
-		        Contacts existingContact = optionalContact.get();
-		        contact.setDateCreated(existingContact.getDateCreated());
-		        contact.setUser(user);
-		        // Save the contact with the updated user information
-		        contactrepo.save(contact);
-		        return new ResponseEntity<>(contact, HttpStatus.CREATED);
-		    }
-	 
-		 else {
-		        // Handle the case where user is not found
-		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		    }
-	        
-
+	    Optional<User> optionalUser = userrepo.findById(userId);
+	    if (optionalUser.isPresent()) {
+	        User user = optionalUser.get();
+	        // Associate the contact with the user
+	        Optional<Contacts> optionalContact = contactrepo.findById(contact.getId());
+	        if (optionalContact.isPresent()) { // Check if the Optional contains a value
+	            Contacts existingContact = optionalContact.get();
+	            contact.setDateCreated(existingContact.getDateCreated());
+	            contact.setUser(user);
+	            // Save the contact with the updated user information
+	            contactrepo.save(contact);
+	            return new ResponseEntity<>(contact, HttpStatus.CREATED);
+	        } else {
+	            // Handle the case where contact is not found
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+	    } else {
+	        // Handle the case where user is not found
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
-	 
-		
+	}
+
 
 
 

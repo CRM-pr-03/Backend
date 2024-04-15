@@ -51,12 +51,12 @@ export class UpdatecontactComponent {
       this.api.addcontact(values, userId).subscribe({
           next: resp => {
               console.log(resp);
-              this.toast.success('Contact added successfully');
-              this._router.navigate(['login']);
+              this.toast.success('Contact updated successfully');
+              this._router.navigate(['/user']);
           },
           error: err => {
               console.error(err);
-              this.toast.error('Failed to add contact');
+              this.toast.error('Failed to update contact');
           }
       });
     }

@@ -63,6 +63,10 @@ List<Contacts> segmentContactsByCountry(Long userId,String country);
 
 
 
+User getUserById(Long userId);
+
+
+
 
 
 

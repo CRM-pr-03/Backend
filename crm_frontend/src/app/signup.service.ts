@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -59,9 +59,14 @@ export class SignupService {
      
       }
 
-      
+      private freshdeskApiUrl = 'https://lokiscrm.freshdesk.com/api/v2/tickets';     
       getAllTickets(): Observable<any> {
-        return this.http.get<any>(`${this.BASEURL}ts`);
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa('JS53zSZJqWLO4POFuPoY:X') // Replace 'your_api_key' with your Freshdesk API key
+        });
+    
+        return this.http.get(this.freshdeskApiUrl, { headers: headers });
       }
 
 
@@ -85,8 +90,13 @@ export class SignupService {
       
     
 
-      segmentAndAssign(requestData: any) {
-        return this.http.post<any>(this.LEADURL + 'segmentAndAssign', requestData);
+      // segmentAndAssign(userId:number,requestData: any) {
+      //   // return this.http.post<any>(this.LEADURL + 'segmentAndAssign', requestData);
+      //   return this.http.post<any>(`${this.LEADURL}${userId}/segmentAndAssign`, requestData);
+      // }
+      segmentAndAssign(requestParams: any) {
+        const userId = sessionStorage.getItem('id');
+        return this.http.post<any>(this.LEADURL + `${userId}/segmentAndAssign`, requestParams);
       }
     
       getLeadTrackingsByContactId(leadsId: number) {
@@ -101,12 +111,14 @@ export class SignupService {
         return this.http.get<any>(this.LEADURL + `sales-representatives/category/${category}`);
       }
     
-      getContactsByCategory(category: string) {
-        return this.http.get<any>(this.LEADURL + `contacts/category/${category}`);
+      getContactsByCategory(userId: number,category: string) {
+        // return this.http.get<any>(this.LEADURL +`{userId}/contacts/category/${category}`);
+        return this.http.get<any>(`${this.LEADURL}${userId}/contacts/category/${category}`);
       }
     
       getAllLeadTrackings() {
-        return this.http.get<any>(this.LEADURL + 'lead-trackings');
+        const userId = sessionStorage.getItem('id');
+        return this.http.get<any>(`${this.LEADURL}${userId}/lead-trackings`);
       }
 
 

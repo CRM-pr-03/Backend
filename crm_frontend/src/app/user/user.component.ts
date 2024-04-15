@@ -56,17 +56,35 @@ export class UserComponent implements OnInit {
   }
 
   searchContacts(): void {
+    // Retrieve userId from session storage
+    const userId = sessionStorage.getItem('id');
+    
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+    
     if (this.searchType === 'date') {
       // Handle search by date logic here
     } else {
-      if (this.userId && this.searchType && ((this.searchType === 'country' && this.selectedCountry) || (this.searchType === 'category' && this.selectedCategory) || (this.searchType !== 'country' && this.searchType !== 'category' && this.searchValue))) {
-        this.api.segmentContacts(this.userId, this.searchType, ((this.searchType === 'country') ? this.selectedCountry : (this.searchType === 'category') ? this.selectedCategory : this.searchValue))
-          .subscribe((Contacts: any[]) => {
-            this.Contacts = Contacts;
+      if (this.searchType && 
+          ((this.searchType === 'country' && this.selectedCountry) || 
+          (this.searchType === 'category' && this.selectedCategory) || 
+          (this.searchType !== 'country' && this.searchType !== 'category' && this.searchValue))) {
+  
+        const searchValue = (this.searchType === 'country') ? this.selectedCountry : 
+                           (this.searchType === 'category') ? this.selectedCategory : 
+                           this.searchValue;
+  
+        this.api.segmentContacts(parseInt(userId), this.searchType, searchValue)
+          .subscribe((contacts: any[]) => {
+            this.Contacts = contacts;
           });
+  
       } else {
         console.error('Invalid search parameters');
       }
     }
   }
+  
 }

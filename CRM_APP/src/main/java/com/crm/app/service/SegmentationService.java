@@ -6,6 +6,8 @@ import com.crm.app.entity.Contacts;
 
 public interface SegmentationService {
 
-	List<Contacts> segmentContactsByCategory(String category);
+	
+
+	List<Contacts> segmentContactsByCategory(Long userId, String category);
 
 }

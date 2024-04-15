@@ -1,7 +1,7 @@
 package com.crm.app.service;
 
 
-import java.util.Base64;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -222,32 +222,39 @@ public class UserServiceIMPL implements UserService{
         }
     }
 
-	@Override
-	public List<Contacts> segmentContactsByCategory(Long userId,String category) {
-		
-		Optional<User> optionalUser = userrepo.findById(userId);
+    @Override
+    public List<Contacts> segmentContactsByCategory(Long userId, String category) {
+        Optional<User> optionalUser = userrepo.findById(userId);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            return contactsrepo.findByCategory(category); // Return the contacts collection
+            return contactsrepo.findByUserAndCategory(user, category); // Filter contacts by user and category
         } else {
             return Collections.emptyList();
         }
-	        
-	}
+    }
+
+    @Override
+    public List<Contacts> segmentContactsByCountry(Long userId, String country) {
+        Optional<User> optionalUser = userrepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return contactsrepo.findByUserAndCountry(user, country); // Filter contacts by user and country
+        } else {
+            return Collections.emptyList();
+        }
+    }
 
 	@Override
-	public List<Contacts> segmentContactsByCountry(Long userId, String country) {
-		Optional<User> optionalUser = userrepo.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return contactsrepo.findByCountry(country); // Return the contacts collection
-        } else {
-            return Collections.emptyList();
-        }
-	        
-	} 
+	public User getUserById(Long userId) {
 		
-	
+		Optional<User> optionalUser = userrepo.findById(userId);
+	    if (optionalUser.isPresent()) {
+	        return optionalUser.get();
+	    } else {
+	        throw new RuntimeException("User not found with ID: " + userId);
+	    }
+	}
+
 
 	}
 
