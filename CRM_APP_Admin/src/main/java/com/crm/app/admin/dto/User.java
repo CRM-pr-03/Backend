@@ -31,6 +31,10 @@ public class User {
 		@JsonIgnore
 		private List<Contacts> contacts;
 
+<<<<<<< HEAD:CRM_APP_Admin/src/main/java/com/crm/app/admin/dto/user.java
+=======
+		
+>>>>>>> 0e851a73216226911eef47eb3af13750a1472420:CRM_APP_Admin/src/main/java/com/crm/app/admin/dto/User.java
 		public User(long id, String firstname, String lastname, String email, String mobile, String password,
 				boolean access, LocalDateTime createdAt, LocalDateTime updatedAt, List<Contacts> contacts) {
 			super();

@@ -13,9 +13,9 @@ import com.crm.app.admin.entity.Admin;
 
 public interface AdminService {
 
-	ResponseEntity<String> addadmin(AdminDTO admindto);
+   ResponseEntity<String> addadmin(AdminDTO admindto);
 
-	public List<Admin> getadmindetails();
+   public List<Admin> getadmindetails();
 
   public List<User> getdetails();
 
