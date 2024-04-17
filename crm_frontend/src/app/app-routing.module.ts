@@ -20,6 +20,7 @@ import { AddcontactComponent } from './addcontact/addcontact.component';
 import { ExcelreportComponent } from './excelreport/excelreport.component';
 import { UpdatecontactComponent } from './updatecontact/updatecontact.component';
 import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
+import { OpportunityComponent } from './opportunity/opportunity.component';
 
 
 
@@ -46,8 +47,8 @@ const routes: Routes = [
   {path:'addcontact',component:AddcontactComponent},
   {path:'update',component:UpdatecontactComponent},
   {path:'excel-report',component:ExcelreportComponent},
-  {path:'lead-tracking',component:LeadTrackingComponent}
-
+  {path:'lead-tracking',component:LeadTrackingComponent},
+  {path:'opportunity',component:OpportunityComponent}
  
  
 

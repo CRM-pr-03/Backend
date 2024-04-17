@@ -18,7 +18,7 @@ public interface LeadTrackingRepo extends JpaRepository<LeadTracking,Long>{
 
 	 List<LeadTracking> findByContact(Contacts contact);
 
-	
+	 List<LeadTracking> findByStatus(String status);
 	
 	
 }

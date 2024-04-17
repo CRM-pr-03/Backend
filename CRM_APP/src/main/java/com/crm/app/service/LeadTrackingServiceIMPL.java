@@ -31,7 +31,12 @@ public class LeadTrackingServiceIMPL implements LeadTrackingService {
         return leadTrackingRepository.findByContactId(contactId);
     }
     
-    
+
+    @Override
+    public List<LeadTracking> getLeadTrackingsByStatus(String status) {
+        return leadTrackingRepository.findByStatus(status);
+    }
+
     public List<LeadTracking> getAllLeadTrackings() {
         return leadTrackingRepository.findAll();
     }

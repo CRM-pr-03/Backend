@@ -34,6 +34,7 @@ import { ExcelreportComponent } from './excelreport/excelreport.component';
 import { UpdatecontactComponent } from './updatecontact/updatecontact.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
+import { OpportunityComponent } from './opportunity/opportunity.component';
 
 
 
@@ -61,6 +62,7 @@ import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
          ExcelreportComponent,
          UpdatecontactComponent,
          LeadTrackingComponent,
+         OpportunityComponent,
         
 
 

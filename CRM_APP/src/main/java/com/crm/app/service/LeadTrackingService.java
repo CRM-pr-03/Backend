@@ -8,13 +8,14 @@ import com.crm.app.entity.SalesRepresentative;
 
 public interface LeadTrackingService {
 
-	List<LeadTracking> assignContactsToSalesRepresentative(String category, String status, SalesRepresentative salesRep,
-			List<Contacts> segmentedContacts);
+    List<LeadTracking> assignContactsToSalesRepresentative(String category, String status, SalesRepresentative salesRep,
+            List<Contacts> segmentedContacts);
 
-	List<LeadTracking> getLeadTrackingsByContactId(Long contactId);
+    List<LeadTracking> getLeadTrackingsByContactId(Long contactId);
 
-	LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus);
+    LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus);
 
-	List<LeadTracking> getAllLeadTrackings();
-
+    List<LeadTracking> getAllLeadTrackings();
+    
+    List<LeadTracking> getLeadTrackingsByStatus(String status); // New method
 }

@@ -1,0 +1,214 @@
+.container {
+    width: 50%;
+    margin: auto;
+    
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  /* Overall layout */
+.flex-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    
+    /* background-color: #f0f0f0; */
+    
+    padding: 20px;
+  }
+  h2{
+    margin-top: 20px;
+    font-size: 25px; 
+    font-weight:bold;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: azure;
+  }
+  h3{
+    margin-left: 32%;
+    margin-bottom: 3%;
+  }
+  /* Individual containers */
+  .container {
+    /* background-color: #e7eaf4; */
+    /* background-image: url(../../assets/leaf3.png); */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right, #141e30, #243b55);
+    width: 500px;
+    
+  }
+  
+  .container1 {
+    /* background-color: #e9ecf7; */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Form elements */
+  form {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 18px;
+    color:azure;
+    margin-bottom: 8px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg fill='currentColor' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  
+  /* Buttons */
+  button {
+    background-image: linear-gradient(to right, #141e30, #243b55);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+  
+    margin-left: 35%;
+  }
+  
+  button:hover {
+    background-image: linear-gradient(to right, #141e30, #243b55);
+  
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  /* Disabled button style */
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Icon boxes */
+  .icon-box {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 10px;
+  }
+  mat-icon{
+    color: azure;
+  }
+  
+  li{
+    color: azure;
+  }
+  
+  /* .icon-box.red {
+    background-color: #ff4d4d;
+  } */
+  
+  /* .icon-box.green {
+    background-color: #4caf50;
+  } */
+  
+  /* .icon-box.blue {
+    background-color: #007bff;
+  } */
+  
+  .icon-box.mat-icon {
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  td{
+   background-color:white;
+  }
+  
+  th {
+    background-image: linear-gradient(to right, #141e30, #243b55);
+    color: white;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  /* Responsive adjustments */
+  @media only screen and (max-width: 600px) {
+    .container {
+      grid-column: span 2;
+    }
+  }
+  

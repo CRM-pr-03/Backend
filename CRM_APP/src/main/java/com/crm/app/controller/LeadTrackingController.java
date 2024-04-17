@@ -33,14 +33,26 @@ public class LeadTrackingController {
     private final SegmentationService segmentationService;
     private final SalesRepresentativeService salesRepresentativeService;
     private final ContactsRepo contactRepository; // Inject ContactRepository
- 
+    
+    
     public LeadTrackingController(LeadTrackingService leadTrackingService, SegmentationService segmentationService, SalesRepresentativeService salesRepresentativeService, ContactsRepo contactRepository) {
         this.leadTrackingService = leadTrackingService;
         this.segmentationService = segmentationService;
         this.salesRepresentativeService = salesRepresentativeService;
         this.contactRepository = contactRepository;
+        
     }
- 
+    @GetMapping("/qualified")
+    public ResponseEntity<?> getQualifiedLeadTrackings() {
+        List<LeadTracking> qualifiedLeadTrackings = leadTrackingService.getLeadTrackingsByStatus("qualified");
+        if (!qualifiedLeadTrackings.isEmpty()) {
+            return ResponseEntity.ok(qualifiedLeadTrackings);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No qualified lead trackings found.");
+        }
+    }
+
+    
     @PostMapping("/segmentAndAssign")
     public ResponseEntity<?> segmentAndAssignContacts(@RequestBody Map<String, String> requestParams) {
         String category = requestParams.get("category");
