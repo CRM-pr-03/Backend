@@ -1,63 +1,77 @@
-<div class="flexcontainer">
-    <div class="container">
-    <h2>Opportunity Details</h2>
-    <form>
-      <div class="form-group">
-        <label for="accountName">Account Name:</label>
-        <input type="text" id="accountName" name="accountName" [(ngModel)]="accountName">
-      </div>
-      <div class="form-group">
-        <label for="category">Category:</label>
-            <select formControlName="category" name="category" class="form-control" required>
-                <option value="">Select Category</option>
-                <option value="Textile">Textile</option>
-                <option value="Retail">Retail</option>
-                <option value="Software">Software</option>
-                <option value="Pharmaceutical">Pharmaceutical</option>
-                <option value="Automobile">Automobile</option>
-                <option value="Construction">Construction</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Healthcare">Healthcare</option>
-                <option value="Food and Beverage">Food and Beverage</option>
-                <option value="Finance">Finance</option>
-            </select>
-            <div class="form-group">
-                <label for="opportunityName">Opportunity Label:</label>
-                <input type="text" id="opportunityLabel" name="opportunityLabel" [(ngModel)]="opportunityLabel">
-              </div>
+<div class="container">
+  <h2>Create Opportunity</h2>
+  <form [formGroup]="fm" (ngSubmit)="createOpportunity()">
+    <div class="form-group">
+      <label for="category">Account Type</label>
+      <div class="input-group">
+        <select formControlName="category" class="form-control" id="category">
+          <option value="Textile">Textile</option>
+          <option value="Retail">Retail</option>
+          <option value="Software">Software</option>
+          <option value="Pharmaceutical">Pharmaceutical</option>
+          <option value="Automobile">Automobile</option>
+          <option value="Construction">Construction</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Food & Beverage">Food & Beverage</option>
+          <option value="Finance">Finance</option>
+        </select>
+        <div class="input-group-append">
+          <span class="input-group-text">
+            <i class="fas fa-gift" style="color: #0051ff;"></i>
+          </span>
         </div>
-        <div class="form-group">
-        <label for="stage">Stage:</label>
-        <select id="stage" name="stage" [(ngModel)]="stage">
-          <option value="Need Analysis">Need Analysis</option>
-          <option value="Proposal">Proposal</option>
-          <option value="Closed won">Closed won</option>
-          <option value="Closed lost">Closed lost</option>
-        </select>
-      </div>
-     
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" [(ngModel)]="description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" [(ngModel)]="amount">
-      </div>
-      <div class="form-group">
-        <label for="closedDate">Closed Date:</label>
-        <input type="date" id="closedDate" name="closedDate" [(ngModel)]="closedDate">
-      </div>
-      <div class="form-group">
-        <label for="forecastCategory">Forecast Category:</label>
-        <select id="forecastCategory" name="forecastCategory" [(ngModel)]="forecastCategory">
-          <option value="Omitted">Omitted</option>
-          <option value="Pipeline">Pipeline</option>
-          <option value="Commit">Commit</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </div>
-      <button type="submit" (click)="submit()">Submit</button>
-    </form>
-  </div>
+        <!-- Add new icon here -->
+        <div class="input-group-append">
+          <span class="input-group-text">
+            <i class="fas fa-address-book" style="color: #ff8c00;"></i>
+          </span>
+        </div>
+      </div> <!-- Corrected closing tag -->
+    </div>
+    <div class="form-group">
+      <label for="accountName">Account Name</label>
+      <input type="text" formControlName="accountName" class="form-control" id="accountName" placeholder="Enter Account Name">
+    </div>
+   
+    <div class="form-group">
+      <label for="opportunityName">Opportunity Name</label>
+      <input type="text" formControlName="opportunityName" class="form-control" id="opportunityName" placeholder="Enter Opportunity Name">
+    </div>
+    <div class="form-group">
+      <label for="probability">Probability (%) </label>
+      <input type="number" formControlName="probability" class="form-control" id="probability" placeholder="Enter Probability" min="0">
+    </div>
+    <div class="form-group">
+      <label for="stage">Stage</label>
+      <select formControlName="stage" class="form-control" id="stage">
+        <option value="Need Analysis">Need Analysis</option>
+        <option value="Proposal">Proposal</option>
+        <option value="Closed Won">Closed Won</option>
+        <option value="Closed Lost">Closed Lost</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Enter Description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="number" formControlName="amount" class="form-control" id="amount" placeholder="Enter Amount" min="0">
+    </div>
+    <div class="form-group">
+      <label for="closedDate">Closed Date</label>
+      <input type="date" formControlName="closedDate" class="form-control" id="closedDate">
+    </div>
+    <div class="form-group">
+      <label for="forecastCategory">Forecast Category</label>
+      <select formControlName="forecastCategory" class="form-control" id="forecastCategory">
+        <option value="Omitted">Omitted</option>
+        <option value="Pipeline">Pipeline</option>
+        <option value="Commit">Commit</option>
+        <option value="Closed">Closed</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
