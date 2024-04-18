@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SignupService } from '../signup.service';
-
+ 
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
@@ -10,18 +10,22 @@ import { SignupService } from '../signup.service';
 })
 export class OpportunityComponent implements OnInit {
   fm!: FormGroup;
-  
-  
+  opportunities: any[] = []; // Array to hold fetched opportunities
+  showOpportunities: boolean = false;
+  qualifiedLeads: any[] = []; // Array to hold fetched qualified leads
+showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualified leads
+ // Variable to toggle visibility of opportunity details
+ 
   constructor(
     private fb: FormBuilder,
     private api: SignupService,
     private toast: ToastrService
   ) { }
-
+ 
   ngOnInit(): void {
     this.createForm();
   }
-
+ 
   createForm() {
     this.fm = this.fb.group({
       'accountName': ['', Validators.required],
@@ -33,10 +37,11 @@ export class OpportunityComponent implements OnInit {
       'amount': ['', Validators.required],
       'closedDate': ['', Validators.required],
       'forecastCategory': ['', Validators.required],
+     
       // Add other form controls and validators as needed
     });
   }
-
+ 
   createOpportunity() {
     if (this.fm.valid) {
       this.api.createOpportunity(this.fm.value).subscribe({
@@ -54,6 +59,43 @@ export class OpportunityComponent implements OnInit {
       this.toast.error('Please fill in all required fields');
     }
   }
-  
+ 
+  getOpportunitiesByCategory() {
+    const category = this.fm.get('category')?.value;
+    if (category) {
+      this.api.getOpportunityLabelsByCategory(category).subscribe({
+        next: (response: any[]) => {
+          this.opportunities = response;
+          this.toast.success('Opportunities fetched successfully');
+        },
+        error: (error) => {
+          console.error(error);
+          this.toast.error('Failed to fetch opportunities');
+        }
+      });
+    }
+  }
+  getQualifiedListByCategory() {
+    const category = this.fm.get('category')?.value;
+    if (category) {
+      this.api.getQualifiedLeadNamesByCategory(category).subscribe({
+        next: (response: any[]) => {
+          this.qualifiedLeads = response;
+          this.showQualifiedLeads = true; // Set to true to display qualified leads
+          this.toast.success('Qualified leads fetched successfully');
+        },
+        error: (error) => {
+          console.error(error);
+          this.toast.error('Failed to fetch qualified leads');
+        }
+      });
+    }
+  }
+ 
+  toggleOpportunityDetails() {
+    this.showOpportunities = !this.showOpportunities; // Toggle the visibility of opportunity details
+    if (this.showOpportunities) {
+      this.getOpportunitiesByCategory(); // Fetch opportunities when the button is clicked and details are shown
+    }}
+ 
 }
-  

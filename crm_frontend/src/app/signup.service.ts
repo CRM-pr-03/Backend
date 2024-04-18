@@ -121,6 +121,12 @@ export class SignupService {
         return this.http.get<any[]>(this.OPPORTUNITYURL + "category/" + category);
 
       }
+
+      getQualifiedLeadNamesByCategory(category: string): Observable<string[]> {
+        return this.http.get<any[]>(this.OPPORTUNITYURL + "qualified-leads/" + category);
+   
+       
+      }
       
 
 

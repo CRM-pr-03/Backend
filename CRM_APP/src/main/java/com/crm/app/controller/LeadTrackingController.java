@@ -42,16 +42,6 @@ public class LeadTrackingController {
         this.contactRepository = contactRepository;
         
     }
-    @GetMapping("/qualified-leads/{category}")
-    public ResponseEntity<?> getQualifiedLeadNamesByCategory(@PathVariable String category) {
-        List<String> qualifiedLeadNames = leadTrackingService.getQualifiedLeadNamesByCategory(category);
-        if (!qualifiedLeadNames.isEmpty()) {
-            return ResponseEntity.ok(qualifiedLeadNames);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No qualified leads found for the category: " + category);
-        }
-    }
-
 
     
     @PostMapping("/segmentAndAssign")

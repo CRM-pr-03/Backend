@@ -48,4 +48,6 @@ public class OpportunityController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No qualified leads found for the category: " + category);
         }
     }
+   
+
 }
