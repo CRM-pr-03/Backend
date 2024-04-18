@@ -18,4 +18,6 @@ public interface LeadTrackingService {
     List<LeadTracking> getAllLeadTrackings();
     
     List<LeadTracking> getLeadTrackingsByStatus(String status); // New method
+    
+    
 }

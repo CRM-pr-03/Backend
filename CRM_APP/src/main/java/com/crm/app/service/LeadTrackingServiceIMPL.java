@@ -79,6 +79,8 @@ public class LeadTrackingServiceIMPL implements LeadTrackingService {
             logger.error("Lead tracking record with contact ID {} not found.", contactId);
             throw new RuntimeException("Lead tracking record with contact ID " + contactId + " not found.");
         }
+        
+        
 	}
 	
 }

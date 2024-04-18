@@ -10,8 +10,8 @@ import { SignupService } from '../signup.service';
 })
 export class OpportunityComponent implements OnInit {
   fm!: FormGroup;
-  opportunityLabels: any[] = [];
-
+  
+  
   constructor(
     private fb: FormBuilder,
     private api: SignupService,
@@ -54,6 +54,6 @@ export class OpportunityComponent implements OnInit {
       this.toast.error('Please fill in all required fields');
     }
   }
-
   
 }
+  
