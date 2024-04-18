@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SignupService } from '../signup.service';
 import { Router } from '@angular/router';
 import {  ChangeDetectorRef } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
  
 @Component({
   selector: 'app-onboard',
@@ -12,7 +13,7 @@ import {  ChangeDetectorRef } from '@angular/core';
 export class OnboardComponent implements OnInit {
   users!: any[];
  
-  constructor(private api: SignupService, private _router:Router,private cdr: ChangeDetectorRef) {}
+  constructor(private api: SignupService, private _router:Router,private cdr: ChangeDetectorRef, private toast: ToastrService) {}
  
  
   ngOnInit(): void {
@@ -43,6 +44,10 @@ export class OnboardComponent implements OnInit {
         // You can choose to update the users after successful approval
         this.getUsers();
       });
+    }
+    (err: any) => {
+      console.error('HTTP error:', err);
+      this.toast.error('server is down', 'unable to give access');
     }
   }
 }

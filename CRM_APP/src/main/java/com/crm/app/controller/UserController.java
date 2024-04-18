@@ -32,6 +32,7 @@ import com.crm.app.dto.SignupDTO;
 import com.crm.app.entity.Contacts;
 
 import com.crm.app.entity.User;
+import com.crm.app.entity.UserRole;
 import com.crm.app.service.ContactService;
 import com.crm.app.service.UserService;
 
@@ -39,7 +40,7 @@ import jakarta.validation.Valid;
 
 @Validated
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 	
@@ -78,6 +79,11 @@ public class UserController {
 		return userservice.access(email);
 	}
 	
+	@PutMapping("/role/{email}/{role}")
+	public ResponseEntity<String> assignrole(@PathVariable String email, @PathVariable String role ){
+	    
+		return userservice.assignrole(email,role);
+	}
 	
 	 @PostMapping("/forgot-password")
 	    public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> body) {

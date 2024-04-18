@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
+
+
 export class ReportsComponent {
   showReport: boolean = false;
   showReport2: boolean = false;

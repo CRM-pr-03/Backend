@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.crm.app.admin.dto.Contacts;
-import com.crm.app.admin.dto.Ticket;
+
 import com.crm.app.admin.dto.User;
 
 
 
 
 
-@FeignClient(url="http://localhost:8080",value="User-Client")
+//@FeignClient(url="http://localhost:8080",value="User-Client")
+@FeignClient(name="CRMAPP")
 public interface AdminFeign {
 
 	
@@ -27,12 +28,14 @@ public interface AdminFeign {
 	public String access(@PathVariable String email); 
 	
 
-@GetMapping("/user/tickets")
-public ResponseEntity<List<Ticket>> getAllTickets() ;
 
 @GetMapping("/user/{userId}/contacts")
 public ResponseEntity<List<Contacts>> getContactsByUser(@PathVariable Long userId) ;
     
-  
+@PutMapping("/user/role/{email}/{role}")
+public ResponseEntity<String> assignrole(@PathVariable String email, @PathVariable String role );
+    
+
+
 
 }

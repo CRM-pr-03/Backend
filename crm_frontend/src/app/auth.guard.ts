@@ -3,6 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,20 +12,16 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastr: ToastrService // Inject ToastrService
+    private toastr: ToastrService
   ) {}
 
   canActivate(): boolean {
-    const role = this.authService.getUserRole();
-
-    if (role === 'A') {
-      return true; // Allow access to admin routes
-    } else if (role === 'U') {
-      return true; // Allow access to user routes
+    if (this.authService.isLoggedIn()) {
+      // Check if the user is logged in
+      return true; // Allow access if logged in
     } else {
-      // Display toaster message
+      // Redirect to login page if not logged in
       this.toastr.warning('Please login to access this page', 'Unauthorized');
-      // Redirect to login page
       this.router.navigate(['/login']);
       return false;
     }

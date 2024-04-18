@@ -3,6 +3,7 @@ package com.crm.app.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.crm.app.admin.dto.AdminDTO;
 import com.crm.app.admin.dto.Contacts;
-import com.crm.app.admin.dto.Ticket;
+
 import com.crm.app.admin.dto.User;
 import com.crm.app.admin.entity.Admin;
 import com.crm.app.admin.service.AdminService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/admin")
+
 public class AdminController {
 	
 	
@@ -58,15 +62,22 @@ public class AdminController {
 	}
 	
 	@PutMapping("/giveapproval/{email}")
+	@CircuitBreaker(name="CRM",fallbackMethod="fallbackMethod")
 	public String access(@PathVariable String email) {
 		return adminservice.access(email);
 	}
+	public String fallbackMethod(@PathVariable String email,RuntimeException ex){
+		return ("{\"status\": \"Service is Down\"}");
+		
+	}
+	
+	@PutMapping("/role/{email}/{role}")
+	public ResponseEntity<String> assignrole(@PathVariable String email, @PathVariable String role ){
+	    
+		return adminservice.assignrole(email,role);
+	}
 
-	@GetMapping("/tickets")
-    public ResponseEntity<List<Ticket>> getAllTickets() {
-        
-        return  adminservice.getAllTickets();
-    }
+
 	
 	@GetMapping("/{userId}")
 	   public ResponseEntity<List<Contacts>> getContactsByUser(@PathVariable Long userId) {

@@ -34,6 +34,12 @@ import { ExcelreportComponent } from './excelreport/excelreport.component';
 import { UpdatecontactComponent } from './updatecontact/updatecontact.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
+import { AuthService } from './auth.service';
+import { NotfoundComponent } from './notfound/notfound.component';
+//  import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { RolemanagementComponent } from './rolemanagement/rolemanagement.component';
+import { UpdateLeadsComponent } from './update-leads/update-leads.component';
+
 
 
 
@@ -61,6 +67,9 @@ import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
          ExcelreportComponent,
          UpdatecontactComponent,
          LeadTrackingComponent,
+         NotfoundComponent,
+         RolemanagementComponent,
+         UpdateLeadsComponent,
         
 
 
@@ -86,6 +95,8 @@ import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
   ],
  
   providers: [
+    AuthService,
+    // { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideClientHydration(),
     provideAnimationsAsync(),
     { provide: 'HttpConfigOptions', useValue: { useFetch: true } }

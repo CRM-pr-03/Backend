@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ import jakarta.persistence.OneToMany;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO )
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 
 	private String firstname;
@@ -33,6 +35,8 @@ public class User {
 	private String password;
 	private boolean access;
 	private String otp;
+	private String role;
+
 	@CreationTimestamp
     @Column(name = "createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -47,9 +51,11 @@ public class User {
 
 
 	
+
 	
 	public User(long id, String firstname, String lastname, String email, String mobile, String password,
-			boolean access, String otp, LocalDateTime createdAt, LocalDateTime updatedAt, List<Contacts> contacts) {
+			boolean access, String otp,String role, LocalDateTime createdAt, LocalDateTime updatedAt,
+			List<Contacts> contacts) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -59,12 +65,13 @@ public class User {
 		this.password = password;
 		this.access = access;
 		this.otp = otp;
+		this.role = role;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.contacts = contacts;
 	}
-	
-	
+
+
 	public User() {
 		super();
 		
@@ -108,13 +115,18 @@ public class User {
 		this.password = password;
 	}
 	
+
+	
 	public boolean isAccess() {
 		return access;
 	}
+
+
 	public void setAccess(boolean access) {
 		this.access = access;
 	}
-	
+
+
 	public String getOtp() {
 		return otp;
 	}
@@ -132,13 +144,32 @@ public class User {
 		this.contacts = contacts;
 	}
 
+	
+
+	
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 
 	@Override
 	public String toString() {
-		return "user [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-				+ ", mobile=" + mobile + ", password=" + password + ", access=" + access + ", otp=" + otp
-				+ ", created_at=" + createdAt + ", updated_at=" + updatedAt + ", contacts=" + contacts + "]";
+		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
+				+ ", mobile=" + mobile + ", password=" + password + ", access=" + access + ", otp=" + otp + ", role="
+				+ role + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contacts=" + contacts + "]";
 	}
+
+
+
+
+	
 
 	
 	

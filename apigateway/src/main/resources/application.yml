@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: apigateway
+  cloud:
+    gateway:
+      routes:
+        - id: CRMAPP
+          uri: lb://CRMAPP
+          predicates:
+            - Path=/user/**
+           
+        - id: CRMAPP
+          uri: lb://CRMAPP
+          predicates:
+            - Path=/leads/**
+        - id: CRMADMIN
+          uri: lb://CRMADMIN
+          predicates:
+            - Path=/admin/**
+        

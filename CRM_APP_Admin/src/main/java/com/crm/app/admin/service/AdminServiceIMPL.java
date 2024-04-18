@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.crm.app.admin.dto.AdminDTO;
 import com.crm.app.admin.dto.Contacts;
-import com.crm.app.admin.dto.Ticket;
+
 import com.crm.app.admin.dto.User;
 import com.crm.app.admin.entity.Admin;
 import com.crm.app.admin.feign.AdminFeign;
@@ -82,16 +82,17 @@ public class AdminServiceIMPL implements AdminService{
 		return new ResponseEntity<>("Incorrect password",HttpStatus.BAD_REQUEST);
 	}
 
-	@Override
-	public ResponseEntity<List<Ticket>> getAllTickets() {
-		
-		return adminfeign.getAllTickets();
-	}
 
 	@Override
 	public ResponseEntity<List<Contacts>> getContactsByUser(Long userId) {
 		
 		return adminfeign.getContactsByUser(userId);
+	}
+
+	@Override
+	public ResponseEntity<String> assignrole(String email, String role) {
+		
+		return adminfeign.assignrole(email, role);
 	}
 	
 

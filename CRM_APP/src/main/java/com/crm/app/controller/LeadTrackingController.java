@@ -30,7 +30,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/leads")
-@CrossOrigin
+//@CrossOrigin
 public class LeadTrackingController {
 	private final LeadTrackingService leadTrackingService;
     private final SegmentationService segmentationService;
@@ -55,22 +55,14 @@ public class LeadTrackingController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Invalid status value. Accepted values are: qualified, unqualified, contacted, nurtured");
         }
-<<<<<<< HEAD
         User user = userservice.getUserById(userId);
-=======
->>>>>>> 0e851a73216226911eef47eb3af13750a1472420
 
         List<SalesRepresentative> salesReps = salesRepresentativeService.findByCategory(category);
 
         if (salesReps.size() == 1) {
             SalesRepresentative salesRep = salesReps.get(0);
-<<<<<<< HEAD
             List<Contacts> segmentedContacts = segmentationService.segmentContactsByCategory(userId, category); // Pass userId
             List<LeadTracking> leadTrackings = leadTrackingService.assignContactsToSalesRepresentative(category, status, salesRep, segmentedContacts,user);
-=======
-            List<Contacts> segmentedContacts = segmentationService.segmentContactsByCategory(category);
-            List<LeadTracking> leadTrackings = leadTrackingService.assignContactsToSalesRepresentative(category, status, salesRep, segmentedContacts);
->>>>>>> 0e851a73216226911eef47eb3af13750a1472420
             if (leadTrackings.isEmpty()) {
                 return ResponseEntity.ok("No new contacts to assign.");
             }
@@ -84,12 +76,8 @@ public class LeadTrackingController {
         }
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0e851a73216226911eef47eb3af13750a1472420
 	
-    
     @GetMapping("/lead-trackings/contact/{contactId}")
     public ResponseEntity<?> getLeadTrackingsByContactId(@PathVariable Long contactId) {
         List<LeadTracking> leadTrackings = leadTrackingService.getLeadTrackingsByContactId(contactId);
@@ -155,6 +143,16 @@ public class LeadTrackingController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body("No lead trackings found for user with ID '" + userId + "'.");
+        }
+    }
+    
+    @GetMapping("/{userId}/{Category}/lead-trackings")
+    public ResponseEntity<?> getAllLeadTrackings(@PathVariable Long userId, @PathVariable String Category) {
+        List<LeadTracking> leadTrackings = leadTrackingService.getAllLeadTrackings(userId, Category);
+        if (!leadTrackings.isEmpty()) {
+            return ResponseEntity.ok(leadTrackings);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No lead trackings found for user with ID '" + userId + "'.");
         }
     }
 

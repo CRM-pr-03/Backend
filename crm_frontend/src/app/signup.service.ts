@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
 export class SignupService {
  
  
+ 
   
-  BASEURL:string="http://localhost:8080/user/";
-  ADMINURL:string="http://localhost:8082/admin/";
-  LEADURL:string="http://localhost:8080/leads/";
+  
+  BASEURL:string="http://localhost:9191/user/";
+  ADMINURL:string="http://localhost:9191/admin/";
+  LEADURL:string="http://localhost:9191/leads/";
     constructor(private http:HttpClient)
      {
    
@@ -118,7 +120,24 @@ export class SignupService {
         const userId = sessionStorage.getItem('id');
         return this.http.get<any>(`${this.LEADURL}${userId}/lead-trackings`);
       }
+      // getAllLeadTrackingsByUserId(userId: number,category: string) {
+        
+      //   return this.http.get<any>(`${this.LEADURL}${userId}/lead-trackings`);
+      // }
 
 
+      assignRole(email: string, role: string): Observable<any> {
+        return this.http.put<any>(`${this.ADMINURL}role/${email}/${role}`, {});
+      }
 
+      // getAllLeadTrackingsByUserIdAndCategory(userId: number, category: string): Observable<any> {
+      //   return this.http.get<any>(`${this.LEADURL}${userId}/${category}/lead-trackings`);
+      // }
+      
+      getAllLeadTrackingsByCategory(userId: number,category: string): Observable<any> {
+        return this.http.get<any>(`${this.LEADURL}${userId}/${category}/lead-trackings`);
+      }
+      getAllLeadTrackingsByUserIdAndCategory(userId: number, category: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.LEADURL}${userId}/${category}/lead-trackings`);
+      }
   }

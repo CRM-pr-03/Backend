@@ -21,4 +21,6 @@ public interface LeadTrackingService {
 	List<LeadTracking> assignContactsToSalesRepresentative(String category, String status, SalesRepresentative salesRep,
 			List<Contacts> segmentedContacts, User user);
 
+	List<LeadTracking> getAllLeadTrackings(Long userId, String category);
+
 }

@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
@@ -22,6 +23,7 @@ public class User {
 		private String mobile;
 		private String password;
 		private boolean access;
+		private String role;
 	    private LocalDateTime createdAt;
 		
 		
@@ -31,12 +33,8 @@ public class User {
 		@JsonIgnore
 		private List<Contacts> contacts;
 
-<<<<<<< HEAD:CRM_APP_Admin/src/main/java/com/crm/app/admin/dto/user.java
-=======
-		
->>>>>>> 0e851a73216226911eef47eb3af13750a1472420:CRM_APP_Admin/src/main/java/com/crm/app/admin/dto/User.java
 		public User(long id, String firstname, String lastname, String email, String mobile, String password,
-				boolean access, LocalDateTime createdAt, LocalDateTime updatedAt, List<Contacts> contacts) {
+				boolean access, String role,LocalDateTime createdAt, LocalDateTime updatedAt, List<Contacts> contacts) {
 			super();
 			this.id = id;
 			this.firstname = firstname;
@@ -45,14 +43,15 @@ public class User {
 			this.mobile = mobile;
 			this.password = password;
 			this.access = access;
+			this.role=role;
 			this.createdAt = createdAt;
 			this.updatedAt = updatedAt;
 			this.contacts = contacts;
+			
 		}
 
 		public User() {
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		public long getId() {
@@ -119,12 +118,26 @@ public class User {
 			this.contacts = contacts;
 		}
 
+		
+		
+
+		public String getRole() {
+			return role;
+		}
+
+		public void setRole(String role) {
+			this.role = role;
+		}
+
 		@Override
 		public String toString() {
 			return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
-					+ ", mobile=" + mobile + ", password=" + password + ", access=" + access + ", createdAt="
-					+ createdAt + ", updatedAt=" + updatedAt + ", contacts=" + contacts + "]";
+					+ ", mobile=" + mobile + ", password=" + password + ", access=" + access + ", role=" + role
+					+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contacts=" + contacts + "]";
 		}
+
+
+		
 
 
 		

@@ -21,6 +21,8 @@ public interface LeadTrackingRepo extends JpaRepository<LeadTracking,Long>{
 
 	List<LeadTracking> findByUser(User user);
 
+	List<LeadTracking> findByUserAndCategory(User user, String category);
+
 	
 	
 	

@@ -82,7 +82,7 @@ public class UserServiceIMPL implements UserService{
 		
 		if(u3.getPassword().equals(logindto.getPassword())) {
 			     
-			return new ResponseEntity<>("{\"status\": \"logged in\", \"data\": {\"id\": " + u3.getId() + ", \"email\": \"" + u3.getEmail() + "\", \"firstname\": \"" + u3.getFirstname() + "\"}}", HttpStatus.OK);
+			return new ResponseEntity<>("{\"status\": \"logged in\", \"data\": {\"id\": " + u3.getId() + ", \"email\": \"" + u3.getEmail() + "\", \"firstname\": \"" + u3.getFirstname() + "\",\"userRole\": \""+u3.getRole()+"\"}}", HttpStatus.OK);
 		}
 		
 		
@@ -94,7 +94,8 @@ public class UserServiceIMPL implements UserService{
 	@Override
 	public List<User> getuserdetails() {
 		
-		return userrepo.findAll();
+		
+		return userrepo.findAllWithAccess();
 	}
 
 	@Override
@@ -253,6 +254,19 @@ public class UserServiceIMPL implements UserService{
 	    } else {
 	        throw new RuntimeException("User not found with ID: " + userId);
 	    }
+	}
+
+
+	@Override
+	public ResponseEntity<String> assignrole(String email,String role) {
+		User u9 = userrepo.findByEmail(email);
+		if(u9.isAccess()==true) {
+			u9.setRole(role);
+			userrepo.save(u9);
+			return new ResponseEntity<>("{\"status\": \"success\"}", HttpStatus.OK);
+		}
+		return new ResponseEntity<>("{\"status\": \"failed\"}", HttpStatus.OK);
+
 	}
 
 

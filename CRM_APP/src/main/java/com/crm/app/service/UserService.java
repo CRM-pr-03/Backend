@@ -70,6 +70,13 @@ User getUserById(Long userId);
 
 
 
+ResponseEntity<String> assignrole(String email, String role);
+
+
+
+
+
+
 
 
 

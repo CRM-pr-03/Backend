@@ -7,7 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppComponent } from './app.component';
-
+ 
 import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UserComponent } from './user/user.component';
@@ -21,10 +21,13 @@ import { ExcelreportComponent } from './excelreport/excelreport.component';
 import { UpdatecontactComponent } from './updatecontact/updatecontact.component';
 import { LeadTrackingComponent } from './lead-tracking/lead-tracking.component';
 import { AuthGuard } from './auth.guard';
-
-
-
-
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RolemanagementComponent } from './rolemanagement/rolemanagement.component';
+import { UpdateLeadsComponent } from './update-leads/update-leads.component';
+ 
+ 
+ 
+ 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent,},
@@ -47,18 +50,22 @@ const routes: Routes = [
   {path:'update',component:UpdatecontactComponent,canActivate: [AuthGuard]},
   {path:'excel-report',component:ExcelreportComponent,canActivate: [AuthGuard]},
   {path:'lead-tracking',component:LeadTrackingComponent,canActivate: [AuthGuard]},
-
-  
-
+  {path:'rolemanagement',component:RolemanagementComponent},
+  {path:'update-leads',component:UpdateLeadsComponent},
+  {path:'**',component:NotfoundComponent}
  
  
-
-  
-
+ 
+ 
+ 
+ 
+ 
+ 
 ];
-
+ 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+ 

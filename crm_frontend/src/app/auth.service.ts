@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  isAdmin() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor() { }
 
@@ -48,4 +51,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem('role');
   }
+
+
 }
