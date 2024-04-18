@@ -16,6 +16,7 @@ public interface LeadTrackingService {
     LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus);
 
     List<LeadTracking> getAllLeadTrackings();
+    List<String> getQualifiedLeadNamesByCategory(String category);
     
     List<LeadTracking> getLeadTrackingsByStatus(String status); // New method
     

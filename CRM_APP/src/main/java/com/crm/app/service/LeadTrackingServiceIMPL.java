@@ -2,8 +2,10 @@ package com.crm.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,39 +14,35 @@ import com.crm.app.entity.LeadTracking;
 import com.crm.app.entity.SalesRepresentative;
 import com.crm.app.repo.LeadTrackingRepo;
 
-
-
-import org.slf4j.Logger;
-
-import org.slf4j.LoggerFactory;
-
 @Service
 public class LeadTrackingServiceIMPL implements LeadTrackingService {
-	private final LeadTrackingRepo leadTrackingRepository;
+    private final LeadTrackingRepo leadTrackingRepository;
     private static final Logger logger = LoggerFactory.getLogger(LeadTrackingServiceIMPL.class);
+
     public LeadTrackingServiceIMPL(LeadTrackingRepo leadTrackingRepository) {
-         this.leadTrackingRepository = leadTrackingRepository;
+        this.leadTrackingRepository = leadTrackingRepository;
     }
-    
-    
+
+    @Override
     public List<LeadTracking> getLeadTrackingsByContactId(Long contactId) {
         return leadTrackingRepository.findByContactId(contactId);
     }
-    
 
     @Override
     public List<LeadTracking> getLeadTrackingsByStatus(String status) {
         return leadTrackingRepository.findByStatus(status);
     }
 
+    @Override
     public List<LeadTracking> getAllLeadTrackings() {
         return leadTrackingRepository.findAll();
     }
+
     @Override
     public List<LeadTracking> assignContactsToSalesRepresentative(String category, String status, SalesRepresentative salesRep, List<Contacts> contacts) {
         List<LeadTracking> leadTrackings = new ArrayList<>();
         for (Contacts contact : contacts) {
-            List<LeadTracking> existingLeadTrackings =leadTrackingRepository.findByContact(contact);
+            List<LeadTracking> existingLeadTrackings = leadTrackingRepository.findByContact(contact);
             if (existingLeadTrackings.isEmpty()) {
                 LeadTracking leadTracking = new LeadTracking();
                 leadTracking.setContact(contact);
@@ -64,13 +62,11 @@ public class LeadTrackingServiceIMPL implements LeadTrackingService {
         }
         return leadTrackings;
     }
-    public boolean contactsExistForCategory(String category) {
-        List<LeadTracking> leadTrackings = leadTrackingRepository.findByCategory(category);
-        return !leadTrackings.isEmpty();
-    }
+
+    @Override
     @Transactional
-	public LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus) {
-		List<LeadTracking> leadTrackings = leadTrackingRepository.findByContactId(contactId);
+    public LeadTracking updateLeadTrackingStatus(Long contactId, String newStatus) {
+        List<LeadTracking> leadTrackings = leadTrackingRepository.findByContactId(contactId);
         if (!leadTrackings.isEmpty()) {
             LeadTracking leadTracking = leadTrackings.get(0);
             leadTracking.setStatus(newStatus);
@@ -79,13 +75,19 @@ public class LeadTrackingServiceIMPL implements LeadTrackingService {
             logger.error("Lead tracking record with contact ID {} not found.", contactId);
             throw new RuntimeException("Lead tracking record with contact ID " + contactId + " not found.");
         }
-        
-        
-	}
-	
+    }
+
+    @Override
+    public List<String> getQualifiedLeadNamesByCategory(String category) {
+        List<LeadTracking> qualifiedLeads = leadTrackingRepository.findByCategoryAndStatus(category, "qualified");
+        return qualifiedLeads.stream()
+                .map(LeadTracking::getName)
+                .collect(Collectors.toList());
+    }
+
+    // Utility method to check if contacts exist for a given category
+    public boolean contactsExistForCategory(String category) {
+        List<LeadTracking> leadTrackings = leadTrackingRepository.findByCategory(category);
+        return !leadTrackings.isEmpty();
+    }
 }
-
-	
-
-	
-

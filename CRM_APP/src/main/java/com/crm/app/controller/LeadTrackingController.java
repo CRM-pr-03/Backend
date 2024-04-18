@@ -42,15 +42,16 @@ public class LeadTrackingController {
         this.contactRepository = contactRepository;
         
     }
-    @GetMapping("/qualified")
-    public ResponseEntity<?> getQualifiedLeadTrackings() {
-        List<LeadTracking> qualifiedLeadTrackings = leadTrackingService.getLeadTrackingsByStatus("qualified");
-        if (!qualifiedLeadTrackings.isEmpty()) {
-            return ResponseEntity.ok(qualifiedLeadTrackings);
+    @GetMapping("/qualified-leads/{category}")
+    public ResponseEntity<?> getQualifiedLeadNamesByCategory(@PathVariable String category) {
+        List<String> qualifiedLeadNames = leadTrackingService.getQualifiedLeadNamesByCategory(category);
+        if (!qualifiedLeadNames.isEmpty()) {
+            return ResponseEntity.ok(qualifiedLeadNames);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No qualified lead trackings found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No qualified leads found for the category: " + category);
         }
     }
+
 
     
     @PostMapping("/segmentAndAssign")
