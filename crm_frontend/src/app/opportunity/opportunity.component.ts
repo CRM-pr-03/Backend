@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SignupService } from '../signup.service';
- 
+
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
@@ -13,19 +13,18 @@ export class OpportunityComponent implements OnInit {
   opportunities: any[] = []; // Array to hold fetched opportunities
   showOpportunities: boolean = false;
   qualifiedLeads: any[] = []; // Array to hold fetched qualified leads
-showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualified leads
- // Variable to toggle visibility of opportunity details
- 
+  showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualified leads
+
   constructor(
     private fb: FormBuilder,
     private api: SignupService,
     private toast: ToastrService
   ) { }
- 
+
   ngOnInit(): void {
     this.createForm();
   }
- 
+
   createForm() {
     this.fm = this.fb.group({
       'accountName': ['', Validators.required],
@@ -37,11 +36,10 @@ showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualifi
       'amount': ['', Validators.required],
       'closedDate': ['', Validators.required],
       'forecastCategory': ['', Validators.required],
-     
       // Add other form controls and validators as needed
     });
   }
- 
+
   createOpportunity() {
     if (this.fm.valid) {
       this.api.createOpportunity(this.fm.value).subscribe({
@@ -59,7 +57,7 @@ showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualifi
       this.toast.error('Please fill in all required fields');
     }
   }
- 
+
   getOpportunitiesByCategory() {
     const category = this.fm.get('category')?.value;
     if (category) {
@@ -75,6 +73,7 @@ showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualifi
       });
     }
   }
+
   getQualifiedListByCategory() {
     const category = this.fm.get('category')?.value;
     if (category) {
@@ -91,11 +90,19 @@ showQualifiedLeads: boolean = false; // Variable to toggle visibility of qualifi
       });
     }
   }
- 
+
   toggleOpportunityDetails() {
     this.showOpportunities = !this.showOpportunities; // Toggle the visibility of opportunity details
     if (this.showOpportunities) {
       this.getOpportunitiesByCategory(); // Fetch opportunities when the button is clicked and details are shown
-    }}
- 
+    }
+  }
+
+  toggleQualifiedLeads() {
+    this.showQualifiedLeads = !this.showQualifiedLeads; // Toggle the visibility of qualified leads
+    if (this.showQualifiedLeads) {
+      this.getQualifiedListByCategory(); // Fetch qualified leads when the button is clicked and details are shown
+    }
+  }
+
 }

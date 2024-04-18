@@ -18,11 +18,10 @@
         </select>
         <div class="icon-box green" (click)="toggleOpportunityDetails()">
           <mat-icon>card_giftcard</mat-icon>
-          </div>
-       
-        <div class="icon-box red" (click)="getQualifiedListByCategory()">
+        </div>
+        <div class="icon-box red" (click)="toggleQualifiedLeads()">
           <mat-icon>person</mat-icon>
-          </div>
+        </div>
       </div>
  
       <!-- Display fetched opportunities when the button is clicked -->
@@ -30,30 +29,27 @@
         <h3>Opportunities:</h3>
         <ul>
           <li *ngFor="let opportunity of opportunities">
-           
-           
             <strong></strong> {{ opportunity.opportunityName }} <br>
           </li>
         </ul>
       </div>
  
- <div *ngIf="showQualifiedLeads">
-      <h3>Qualified Leads:</h3>
-      <ul>
-        <li *ngFor="let lead of qualifiedLeads">
-          <strong>Name:</strong> {{ lead.leads }} <br>
-          <!-- Add other lead details as needed -->
-        </li>
-      </ul>
-    </div>
+      <div *ngIf="showQualifiedLeads">
+        <h3>Qualified Leads:</h3>
+        <ul>
+          <li *ngFor="let lead of qualifiedLeads">
+            <strong></strong> {{ lead }} <br>
+            <!-- Add other lead details as needed -->
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="form-group">
       <label for="accountName">Account Name</label>
       <input type="text" formControlName="accountName" class="form-control" id="accountName" placeholder="Enter Account Name">
     </div>
- 
     <div class="form-group">
-      <label for="opportunityName">Opportunity Name</label>
+      <label for="opportunityName">Opportunity Label</label>
       <input type="text" formControlName="opportunityName" class="form-control" id="opportunityName" placeholder="Enter Opportunity Name">
     </div>
     <div class="form-group">
@@ -81,9 +77,6 @@
       <label for="closedDate">Closed Date</label>
       <input type="date" formControlName="closedDate" class="form-control" id="closedDate">
     </div>
- 
- 
- 
     <div class="form-group">
       <label for="forecastCategory">Forecast Category</label>
       <select formControlName="forecastCategory" class="form-control" id="forecastCategory">
@@ -93,9 +86,6 @@
         <option value="Closed">Closed</option>
       </select>
     </div>
- 
     <button type="submit" class="btn btn-primary">Submit</button>
- 
- 
   </form>
 </div>
