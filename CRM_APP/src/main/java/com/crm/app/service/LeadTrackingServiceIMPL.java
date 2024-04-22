@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -151,7 +152,30 @@ public class LeadTrackingServiceIMPL implements LeadTrackingService {
 		        return Collections.emptyList();
 		    }
 		}
-	}
+
+		@Override
+		public List<LeadTracking> getLeadTrackingsByStatus(String status) {
+			 return leadTrackingRepository.findByStatus(status);
+		}
+
+		@Override
+		public List<String> getQualifiedLeadNamesByCategory(Long userId, String category) {
+		    Optional<User> optionalUser = userrepo.findById(userId);
+		    if (optionalUser.isPresent()) {
+		        User user = optionalUser.get();
+		        
+		        // Check user permission or authorization here if needed
+		        
+		        return leadTrackingRepository.findByUserAndCategoryAndStatus(user, category, "qualified").stream()
+		                .map(LeadTracking::getName)
+		                .collect(Collectors.toList());
+		    } else {
+		        // User not found for given userId
+		        return Collections.emptyList();
+		    }
+		}
+
+}
 	
 
 

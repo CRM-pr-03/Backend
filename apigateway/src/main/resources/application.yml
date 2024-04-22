@@ -13,6 +13,10 @@ spring:
           uri: lb://CRMAPP
           predicates:
             - Path=/leads/**
+        - id: CRMAPP
+          uri: lb://CRMAPP
+          predicates:
+            - Path=/opportunity/**     
         - id: CRMADMIN
           uri: lb://CRMADMIN
           predicates:

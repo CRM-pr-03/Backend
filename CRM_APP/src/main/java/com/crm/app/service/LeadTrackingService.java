@@ -23,4 +23,8 @@ public interface LeadTrackingService {
 
 	List<LeadTracking> getAllLeadTrackings(Long userId, String category);
 
+	List<LeadTracking> getLeadTrackingsByStatus(String string);
+
+	List<String> getQualifiedLeadNamesByCategory(Long userId, String category);
+
 }

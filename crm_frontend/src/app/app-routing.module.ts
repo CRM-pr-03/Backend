@@ -24,6 +24,7 @@ import { AuthGuard } from './auth.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RolemanagementComponent } from './rolemanagement/rolemanagement.component';
 import { UpdateLeadsComponent } from './update-leads/update-leads.component';
+import { OpportunityComponent } from './opportunity/opportunity.component';
  
  
  
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path:'lead-tracking',component:LeadTrackingComponent,canActivate: [AuthGuard]},
   {path:'rolemanagement',component:RolemanagementComponent},
   {path:'update-leads',component:UpdateLeadsComponent},
+  {path:'opportunity',component:OpportunityComponent},
   {path:'**',component:NotfoundComponent}
  
  
