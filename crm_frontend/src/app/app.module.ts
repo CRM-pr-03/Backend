@@ -39,6 +39,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 //  import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RolemanagementComponent } from './rolemanagement/rolemanagement.component';
 import { UpdateLeadsComponent } from './update-leads/update-leads.component';
+import { OpportunityComponent } from './opportunity/opportunity.component';
 
 
 
@@ -70,6 +71,7 @@ import { UpdateLeadsComponent } from './update-leads/update-leads.component';
          NotfoundComponent,
          RolemanagementComponent,
          UpdateLeadsComponent,
+         OpportunityComponent,
         
 
 

@@ -14,6 +14,7 @@ export class SignupService {
   BASEURL:string="http://localhost:9191/user/";
   ADMINURL:string="http://localhost:9191/admin/";
   LEADURL:string="http://localhost:9191/leads/";
+  OPPORTUNITYURL: string ="http://localhost:9191/opportunity/";
     constructor(private http:HttpClient)
      {
    
@@ -139,5 +140,24 @@ export class SignupService {
       }
       getAllLeadTrackingsByUserIdAndCategory(userId: number, category: string): Observable<any[]> {
         return this.http.get<any[]>(`${this.LEADURL}${userId}/${category}/lead-trackings`);
+      }
+
+
+      createOpportunity(opportunityData: any): Observable<any> {
+        return this.http.post<any>(this.OPPORTUNITYURL + "create", opportunityData);
+      }
+ 
+ 
+      getOpportunityLabelsByCategory(category: string): Observable<any[]> {
+        return this.http.get<any[]>(this.OPPORTUNITYURL + "category/" + category);
+ 
+      }
+ 
+      getQualifiedLeadNamesByCategory(category: string): Observable<string[]> {
+        const userId = sessionStorage.getItem('id');
+        return this.http.get<any>(`${this.OPPORTUNITYURL}${userId}/qualified-leads/`+ category);
+        
+   
+       
       }
   }

@@ -1,5 +1,6 @@
 package com.crm.app.repo;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,7 +24,15 @@ public interface LeadTrackingRepo extends JpaRepository<LeadTracking,Long>{
 
 	List<LeadTracking> findByUserAndCategory(User user, String category);
 
+	List<LeadTracking> findByStatus(String status);
+
+//	List<LeadTracking> findByCategoryAndStatus(User user, String category, String status);
+//
+//	
 	
-	
-	
+	   
+	   List<LeadTracking> findByUserAndCategoryAndStatus(User user, String category, String status);
+//
+//	Collection<LeadTracking> findByCategoryAndStatus(User user, String category, String string);
+//	  
 }
